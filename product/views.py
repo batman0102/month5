@@ -5,7 +5,8 @@ from rest_framework import status
 from product.models import Product, Review, Category
 from product.serializers import (ProductSerializer, ProductDetailSerializer,
                                  ReviewSerializer, ReviewsSerializer,
-                                 CategorySerializer, CategoriesSerializer)
+                                 CategorySerializer, CategoriesSerializer,
+                                 ProductsReviewsSerializer)
 
 
 
@@ -55,4 +56,10 @@ def category_api_view(request, id):
     except Category.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     list_ = CategorySerializer(categories).data
+    return Response(data=list_, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def products_reviews_api_view(request):
+    products = Product.objects.all()
+    list_ = ProductsReviewsSerializer(products, many=True).data
     return Response(data=list_, status=status.HTTP_200_OK)
