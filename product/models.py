@@ -17,7 +17,7 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     category = models.ForeignKey(
         Category,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='products'
     )
 
@@ -43,7 +43,7 @@ class Review(models.Model):
     text = models.TextField(max_length=200)
     product = models.ForeignKey(
         Product,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='reviews'
     )
     stars = models.IntegerField(choices=STARS, default=3)
