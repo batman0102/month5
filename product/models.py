@@ -17,7 +17,7 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     category = models.ForeignKey(
         Category,
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         related_name='products'
     )
 
@@ -31,7 +31,6 @@ class Product(models.Model):
         return self.reviews.aggregate(Avg('stars'))['stars__avg'] or 0.0
 
 class Review(models.Model):
-
     STARS = (
         (1, '*'),
         (2, '**'),
@@ -43,7 +42,7 @@ class Review(models.Model):
     text = models.TextField(max_length=200)
     product = models.ForeignKey(
         Product,
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         related_name='reviews'
     )
     stars = models.IntegerField(choices=STARS, default=3)
