@@ -13,6 +13,7 @@ from product.serializers import (ProductSerializer, ProductDetailSerializer,
 
 @api_view(['GET', 'POST'])
 def products_list_api_view(request):
+    print(request.user)
     if request.method == 'GET':
         products = Product.objects.all()
         list_ = ProductSerializer(products, many=True).data
