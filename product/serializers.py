@@ -12,12 +12,12 @@ class ReviewsSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = 'text product stars'.split()
+        fields = 'id text product stars'.split()
 
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = 'name products_count'.split()
+        fields = 'id name products_count'.split()
 
     def get_products_count(self, obj):
         return obj.products.count()
@@ -25,24 +25,24 @@ class CategoriesSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = 'name'.split()
+        fields = 'id name'.split()
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductsSerializer(serializers.ModelSerializer):
     reviews = ReviewsSerializer(many=True)
     class Meta:
         model = Product
-        fields = 'title price reviews'.split()
+        fields = 'id title price reviews'.split()
 
-class ProductDetailSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = 'title description price category_name'.split()
+        fields = 'id title description price category_name'.split()
 
 class ProductsReviewsSerializer(serializers.ModelSerializer):
     reviews = ReviewsSerializer(many=True)
     class Meta:
         model = Product
-        fields = 'title price reviews average_rating'.split()
+        fields = 'id title price reviews average_rating'.split()
 
     def get_average_rating(self, obj):
         return obj.average_rating()
