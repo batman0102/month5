@@ -1,11 +1,14 @@
-venv/
-*.sqlite3
-.env
+
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
 media/
-static/
+
+
+.env
+
 
 .idea/
 .vscode/
-__pycache__/
-*.pyc
-pip-cache/
